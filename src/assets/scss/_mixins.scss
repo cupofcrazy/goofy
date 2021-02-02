@@ -1,0 +1,35 @@
+@mixin center-items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin phone {
+    @media screen and (min-width: $screen-sm) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media screen and (min-width: $screen-md) {
+        @content;
+    }
+}
+@mixin desktop {
+    @media screen and (min-width: $screen-lg) {
+        @content;
+    }
+}
+@mixin desktopxl {
+    @media screen and (min-width: $screen-xl) {
+        @content;
+    }
+}
+
+@mixin pos-abs-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}

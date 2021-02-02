@@ -1,0 +1,62 @@
+@import './fonts';
+@import './variables';
+@import './mixins';
+@import './reset';
+@import './base';
+
+
+:root {
+    --main-color: #fff;
+    --accent-color: #111;
+    --secondary-color: #FFD500;
+    --border-radius: 4px;
+    --grid-columns: 12;
+    --grid-gap: .75rem;
+    --font-sm: 1rem;
+    --font-md: 3rem;
+    --font-lg: 5rem;
+    --heading-sm: 1.875rem;
+    --heading-md: 2.625rem;
+    --heading-lg: 3.625rem;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,.2);
+}
+
+html {
+    font-family: $font-sans-serif;
+}
+
+body {
+  background-color: var(--main-color);
+
+    &.dark {
+        --main-color: #111111;
+        --accent-color: #FFFFFF;
+        --secondary-color: #646464;
+    }
+}
+
+// CSS Transitions
+.fade-enter-active, .fade-leave-active {
+    transition: all .75s ease;
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+    transition: all .75s ease;
+}
+
+.icon {
+    width: 16px;
+    path, line {
+        stroke: var(--accent-color);
+    }
+}

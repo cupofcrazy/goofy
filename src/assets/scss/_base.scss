@@ -1,0 +1,7 @@
+.base-link {
+    color: #909090;
+
+    &.router-link-exact-active {
+        color: var(--accent-color);
+    }
+}
