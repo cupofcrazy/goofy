@@ -11,6 +11,7 @@
 
 <script>
 import { getTrendingGifs } from '@/api'
+
 import Loading from '../components/Loading.vue'
 import GifList from '../components/gifs/GifList.vue'
 

@@ -60,3 +60,9 @@ body {
         stroke: var(--accent-color);
     }
 }
+
+button {
+    border: 0;
+    outline: none;
+    cursor: pointer;
+}

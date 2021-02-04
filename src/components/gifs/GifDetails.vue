@@ -11,7 +11,7 @@
                         :src="gifData.images.original.url"
                         :aspectRatio="getAspectRatio(gifData.images.fixed_width_small)"
                         :alt="gifData.title"
-                        color="#EEE"></lazy-image>
+                        color="#AAA"></lazy-image>
                 </div>
                 <div class="gif__info">
                     <h4 class="gif__title">{{ gifData.title }}</h4>
@@ -36,6 +36,7 @@
 
 <script>
 import gsap from 'gsap'
+
 import { getRelatedGifs } from '@/api'
 import IconCancel from '../icons/IconCancel.vue'
 import IconCheck from '../icons/IconCheck.vue'
@@ -72,7 +73,7 @@ export default {
             this.tl.from(el, { duration: .25, autoAlpha: 0 },)
             .from(this.$refs.gifContainer, {
                 duration: 1,
-                xPercent: 100,
+                yPercent: 100,
                 ease: 'expo.out',
                 onComplete: done
             }, '<.1')
@@ -82,7 +83,7 @@ export default {
 
             this.tl.to(this.$refs.gifContainer, {
                 duration: .75,
-                xPercent: 100,
+                yPercent: 100,
                 ease: 'expo.out',
                 onComplete: done
             }).to(this.$refs.bg, { duration: .25, autoAlpha: 0 }, '<.25')
@@ -116,10 +117,10 @@ button {
 }
 .gif {
     position: absolute;
-    right: 0;
-    top: 0;
-    width: 80%;
-    height: 100%;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 80%;
     z-index: 2;
     background-color: var(--main-color);
     padding: .5rem;
@@ -127,7 +128,7 @@ button {
     border-radius: 6px 0 0 6px;
 
      @include desktop {
-        width: 50%;
+        /* width: 50%; */
     }
 
     &__image {
@@ -144,10 +145,13 @@ button {
         width: 65%;
         font-size: 1.625rem;
         font-weight: 600;
+        color: var(--accent-color);
     }
     &__user {
+        margin: 1rem 0;
         display: flex;
         align-items: center;
+        color: var(--accent-color);
     }
     &__related {
         margin: 2rem 0 0 0;
@@ -161,16 +165,13 @@ button {
     }
     &__close-btn {
         @include center-items;
-        cursor: pointer;
         width: 3.25rem;
         height: 3.25rem;
         background-color: var(--accent-color);
-        border: 0;
-        outline: none;
         border-radius: 10rem;
         position: absolute;
-        top: 1rem;
-        right: 1rem;
+        top: .5rem;
+        right: .5rem;
         transition: transform .5s ease;
 
         &:hover {

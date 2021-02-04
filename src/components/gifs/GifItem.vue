@@ -3,9 +3,9 @@
         <div class="gif__image">
           <lazy-image
               :src="gifData.images.preview_gif.url"
-              :aspectRatio="4/3"
+              :aspectRatio="getAspectRatio(gifData.images.preview_gif)"
               :alt="gifData.title"
-              color="#DDD"></lazy-image>
+              color="#AAA"></lazy-image>
           <!-- <img class="blur" :src="gif.images.original.url" :width="gif.images.original.width" :height="gif.images.original.height" /> -->
           </div>
           <div class="gif__info">
@@ -57,6 +57,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    color: var(--accent-color);
   }
   &__circle {
     width: .75rem;
