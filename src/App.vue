@@ -1,13 +1,19 @@
 <template>
   <div id="app">
+    <header-layout />
     <router-view :key="$route.fullPath" />
   </div>
 </template>
 
 <script>
+import HeaderLayout from './components/layout/HeaderLayout.vue'
 
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    HeaderLayout
+  }
+  
 }
 </script>
 

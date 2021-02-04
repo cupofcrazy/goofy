@@ -31,6 +31,13 @@ const VueScrollTrigger = {
                 })
             }
         })
+        Vue.mixin({
+            methods: {
+                getAspectRatio({ width, height }) {
+                    return width / height
+                },
+            }
+        })
 
     }
 }
