@@ -6,12 +6,33 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex' 
 import HeaderLayout from './components/layout/HeaderLayout.vue'
 
 export default {
   name: 'App',
   components: {
     HeaderLayout
+  },
+  async created() {
+    const theme = localStorage.getItem("theme")
+
+    console.log({ theme })
+    if (theme) {
+      document.body.classList.add(theme)
+    }
+    try {
+      await this.fetchTrendingGifs()
+    } catch (error) {
+      console.error({ error })
+    }
+
+
+  },
+  methods: {
+    ...mapActions({
+      fetchTrendingGifs: 'fetchTrendingGifs'
+    })
   }
   
 }

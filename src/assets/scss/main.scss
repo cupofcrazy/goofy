@@ -8,7 +8,7 @@
 :root {
     --main-color: #fff;
     --accent-color: #111;
-    --secondary-color: #FFD500;
+    --secondary-color: #ffffff;
     --border-radius: 4px;
     --grid-columns: 12;
     --grid-gap: .75rem;
@@ -41,17 +41,17 @@ body {
     &.dark {
         --main-color: #111111;
         --accent-color: #FFFFFF;
-        --secondary-color: #646464;
+        --secondary-color: #1b1b1b;
     }
 }
 
 // CSS Transitions
 .fade-enter-active, .fade-leave-active {
-    transition: all .75s ease;
+    transition: all .25s ease;
 }
 .fade-enter, .fade-leave-to {
     opacity: 0;
-    transition: all .75s ease;
+    transition: all .25s ease;
 }
 
 .icon {

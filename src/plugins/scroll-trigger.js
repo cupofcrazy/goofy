@@ -24,8 +24,8 @@ const VueScrollTrigger = {
             inserted(el) {
                 gsap.from(el, 1, {
                     scrollTrigger: el,
-                    y:  100,
-                    scaleY: 1.15,
+                    y:  50,
+                    // scaleY: 1.15,
                     transformOrigin: '50% 0%',
                     // clipPath: 'inset(0% 0% 100% 0%)',
                     ease: 'expo.out',

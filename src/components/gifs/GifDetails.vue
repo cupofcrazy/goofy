@@ -19,7 +19,9 @@
                         <span class="verified-icon" v-if="gifData.user && gifData.user.is_verified"><icon-check /></span><p>{{ gifData.username || 'anonymous' }}</p>
                     </div>
                 </div>
-
+                <div class="gif__controls gif__buttons">
+                    <button class="base__button" @click="addToSavedGifs(gifData)">+ Add to Saved GIFS</button>
+                </div>
                 <div class="gif__related">
                     <lazy-image
                         v-for="relatedGif in relatedGifs"
@@ -67,12 +69,15 @@ export default {
 
             return gifs;
         },
+        addToSavedGifs(gifData) {
+            this.$store.dispatch('addToSavedGifs', gifData)
+        },
         enterTransition(el, done) {
             this.tl = new gsap.timeline()
 
             this.tl.from(el, { duration: .25, autoAlpha: 0 },)
             .from(this.$refs.gifContainer, {
-                duration: 1,
+                duration: .75,
                 yPercent: 100,
                 ease: 'expo.out',
                 onComplete: done
@@ -82,7 +87,7 @@ export default {
             this.tl = new gsap.timeline()
 
             this.tl.to(this.$refs.gifContainer, {
-                duration: .75,
+                duration: .5,
                 yPercent: 100,
                 ease: 'expo.out',
                 onComplete: done
@@ -122,7 +127,7 @@ button {
     width: 100%;
     height: 80%;
     z-index: 2;
-    background-color: var(--main-color);
+    background-color: var(--secondary-color);
     padding: .5rem;
     overflow: scroll;
     border-radius: 6px 0 0 6px;

@@ -1,17 +1,18 @@
 <template>
-  <div class="home">
-    <transition name="fade" mode="out-in" appear>
-      <loading v-if="isFetching">
-        <p>Loading GIFS...</p>
-      </loading>
-      <GifList :gifList="gifs" v-else />
-    </transition>    
-  </div>
+  <keep-alive>
+    <div class="home">
+      <transition name="fade" mode="out-in" appear>
+        <loading v-if="loading">
+          <p class="loading">Loading GIFS...</p>
+        </loading>
+        <GifList :gifList="gifs" v-else />
+      </transition>    
+    </div>
+  </keep-alive>
 </template>
 
 <script>
-import { getTrendingGifs } from '@/api'
-
+import { mapState } from 'vuex'
 import Loading from '../components/Loading.vue'
 import GifList from '../components/gifs/GifList.vue'
 
@@ -24,17 +25,12 @@ export default {
   },
   data() {
     return {
-      gifs: [],
       isFetching: true
     }
   },
-  async created() {
+  created() {
 
-    const gifs = await getTrendingGifs()
-
-    this.gifs = gifs
-    window.scrollTo(0, 0)
-    this.isFetching = false
+    // window.scrollTo(0, 0)
     
   },
   methods: {
@@ -42,7 +38,10 @@ export default {
   },
   
   computed: {
-   
+    ...mapState({
+      gifs: 'trendingGifs',
+      loading: 'isLoadingGifs'
+    })
   }
 }
 </script>
@@ -53,7 +52,9 @@ export default {
 }
 
 
-
+.loading {
+  color: var(--accent-color);
+}
 
 
 .blur {
