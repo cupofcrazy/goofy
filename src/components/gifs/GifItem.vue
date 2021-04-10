@@ -39,7 +39,7 @@ export default {
 <style lang="scss" scoped>
 .gif {
   border: 0;
-  outline: 0;
+  // outline: 0;
   cursor: pointer;
 
   &__image {

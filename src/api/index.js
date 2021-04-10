@@ -37,3 +37,9 @@ export const getGifsById = async (id) => {
 
     return gifs;
 }
+
+export const search = async ({ query }) => {
+    const { data: gifs } = await giphyFetch.search(query, { sort: 'relevant', limit: 25, lang: 'en', type: 'gifs' })
+
+    return gifs
+}

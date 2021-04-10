@@ -11,9 +11,19 @@ const routes = [
     component: Home
   },
   {
+    path: '/trending',
+    name: 'Trending',
+    component: () => import(/* webpackChunkName: "saved" */ '../views/Trending.vue')
+  },
+  {
     path: '/saved',
     name: 'Saved',
     component: () => import(/* webpackChunkName: "saved" */ '../views/Saved.vue')
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: () => import(/* webpackChunkName: "search" */ '../views/Search.vue')
   },
   {
     path: '/about',

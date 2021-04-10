@@ -3,10 +3,11 @@
         <header class="header">
             <div class="container">
                 <nav class="header-nav">
-                    <h4 class="header__logo">{{ title }}</h4>
+                    <h4 class="header__logo"><router-link class="link" :to="{ name: 'Home' }">{{ title }}</router-link></h4>
                     <ul class="header-nav__links">
-                        <li><router-link class="link" :to="{ name: 'Home' }">Trending</router-link></li>
-                        <li><router-link class="link" :to="{ name: 'Saved' }">Saved</router-link></li>
+                        <li><router-link class="link" :to="{ name: 'Trending' }">Trending</router-link></li>
+                        <li><router-link class="link" :to="{ name: 'Search' }">Search</router-link></li>
+                        <li><router-link class="link" :to="{ name: 'Saved' }">Saved ({{ $store.state.savedGifs.length }})</router-link></li>
                     </ul>
 
                 </nav>
@@ -51,13 +52,17 @@ export default {
     top: 0;
     width: 100%;
     z-index: 1000;
-    font-size: .75rem;
 
     &__logo {
         font-size: 1rem;
         font-weight: 100;
         color: var(--accent-color);
-        margin: 0 3rem 0 0;
+        margin: 0 1rem 0 0;
+
+        @include desktop {
+            font-size: 1.625rem;
+            margin: 0 1.625rem 0 0;
+        }
     }
 
     &__button {
@@ -74,7 +79,12 @@ export default {
     &-nav__links {
         li {
             display: inline-block;
-            margin: 0 2rem 0 0;
+            margin: 0 1rem 0 0;
+            font-size: .85rem;
+
+            @include desktop {
+                margin: 0 1.625rem 0 0;
+            }
         }
     }
 }

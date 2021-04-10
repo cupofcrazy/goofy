@@ -6,9 +6,11 @@ import store from './store'
 import VueLazyload from 'vue-lazyload'
 import VueScrollTrigger from '@/plugins/scroll-trigger'
 import LazyImage from '@/components/global/LazyImage.vue'
+import Tooltip from '@/components/Tooltip.vue'
 
 // global components
 Vue.component('lazy-image', LazyImage)
+Vue.component('tooltip', Tooltip)
 
 Vue.use(VueLazyload)
 Vue.use(VueScrollTrigger)

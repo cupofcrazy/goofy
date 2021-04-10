@@ -15,8 +15,12 @@ export default new Vuex.Store({
     ADD_GIFS_TO_TRENDING(state, payload) {
       state.trendingGifs = payload
     },
+    SET_SAVED_GIFS(state, payload) {
+      state.savedGifs = payload
+    },
     ADD_GIF_TO_SAVED(state, payload) {
-      state.savedGifs.push(payload)
+      const newState = [payload, ...state.savedGifs]
+      state.savedGifs = newState
     },
     REMOVE_GIF_FROM_SAVED(state, payload) {
       
@@ -32,16 +36,11 @@ export default new Vuex.Store({
       commit('SET_GIFS_LOADING', false)
     },
     addToSavedGifs({ state, commit }, gif) {
-      const { savedGifs } = state
+      const processedGif = { ...gif, date: Date.now() }
+      
+      commit('ADD_GIF_TO_SAVED', processedGif)
+      localStorage.setItem('savedGifs', JSON.stringify([...state.savedGifs]))
 
-      // Check if gif is already saved to store
-      for (const currentGif of savedGifs) {
-        if (gif.id === currentGif.id) {
-          console.log('Cannot add duplicate GIF')
-          return;
-        }
-      }
-      commit('ADD_GIF_TO_SAVED', { ...gif, date: Date.now() })
     },
     removeFromSavedGifs({ commit }, gif) {
       commit('REMOVE_GIF_FROM_SAVED', gif)

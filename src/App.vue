@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex' 
+import { mapActions, mapState } from 'vuex' 
 import HeaderLayout from './components/layout/HeaderLayout.vue'
 
 export default {
@@ -16,6 +16,15 @@ export default {
   },
   async created() {
     const theme = localStorage.getItem("theme")
+    const storedGifs = localStorage.getItem("savedGifs")
+
+    console.log(storedGifs)
+
+    if (storedGifs) {
+      this.$store.commit('SET_SAVED_GIFS', JSON.parse(storedGifs))
+    } else {
+      // TODO
+    }
 
     console.log({ theme })
     if (theme) {
@@ -31,7 +40,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchTrendingGifs: 'fetchTrendingGifs'
+      fetchTrendingGifs: 'fetchTrendingGifs',
+      savedGifs: 'savedGifs'
     })
   }
   
