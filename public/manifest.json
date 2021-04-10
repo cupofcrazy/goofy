@@ -1,7 +1,7 @@
 {
-    "name": "Tyler Mitchell — Photographer & Filmmaker",
-    "short_name": "Tyler Mitchell",
-    "theme_color": "#FFBB00",
+    "name": "Goofy — A Giphy Client",
+    "short_name": "Goofy — A Giphy Client",
+    "theme_color": "#111111",
     "icons": [
         {
             "src": "./img/icons/android-icon-36x36.png",
