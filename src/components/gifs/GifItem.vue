@@ -1,5 +1,5 @@
 <template>
-    <div class="gif" v-scroll-fade @click="showDetails(gifData)" @keydown.enter="showDetails(gifData)" aria-selected="true" tabindex="0" role="button">
+    <div class="gif" @click="showDetails(gifData)" @keydown.enter="showDetails(gifData)" aria-selected="true" tabindex="0" role="button">
         <div class="gif__image">
           <lazy-image
               :src="gifData.images.preview_gif.url"
@@ -41,6 +41,12 @@ export default {
   border: 0;
   // outline: 0;
   cursor: pointer;
+  transition: transform .5s ease-in-out;
+
+  &:hover {
+    transform: scale(.95);
+    transition: transform .3s ease-in-out;
+  }
 
   &__image {
     border-radius: 6px;

@@ -51,17 +51,27 @@ export default {
   &__bar {
     display: flex;
     padding: .5rem .5rem;
-    box-shadow: 0px 12px 12px rgba(0, 0, 0, 0.15);
-    border: 1px solid #707070;
+    background-color: var(--main-color);
+    border: 2px solid var(--accent-color);
     gap: 1rem;
     max-width: 600px;
     margin: 1rem auto;
     align-items: center;
     border-radius: 4px;
-    position: sticky;
-    top: 0;
-    left: 0;
-    right: 0;
+    position: relative;
+
+    &:before {
+      position: absolute;
+      bottom: -.5rem;
+      left: 0;
+      content: "";
+      background-color: var(--accent-color);
+      width: 100%;
+      height: 2rem;
+      border: 1px solid var(--accent-color);
+      border-radius: var(--border-radius);
+      z-index: -1;
+    }
   }
   &__form {
     display: block;

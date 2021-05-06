@@ -16,6 +16,7 @@ export default {
   },
   async created() {
     const theme = localStorage.getItem("theme")
+    const name = localStorage.getItem("name")
     const storedGifs = localStorage.getItem("savedGifs")
 
     console.log(storedGifs)
@@ -25,8 +26,9 @@ export default {
     } else {
       // TODO
     }
-
-    console.log({ theme })
+    if (name) {
+      this.$store.dispatch('setUserName', name)
+    }
     if (theme) {
       document.body.classList.add(theme)
     }
@@ -53,5 +55,7 @@ export default {
   font-family: $font-sans-serif, Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  min-height: 100vh;
 }
 </style>

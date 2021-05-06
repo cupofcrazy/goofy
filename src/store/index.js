@@ -7,6 +7,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    user: {
+      name: '',
+      isLoggedIn: false
+    },
     savedGifs: [],
     trendingGifs: [],
     isLoadingGifs: true
@@ -17,6 +21,9 @@ export default new Vuex.Store({
     },
     SET_SAVED_GIFS(state, payload) {
       state.savedGifs = payload
+    },
+    SET_USER_NAME(state, payload) {
+      state.user.name = payload
     },
     ADD_GIF_TO_SAVED(state, payload) {
       const newState = [payload, ...state.savedGifs]
@@ -30,6 +37,10 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    setUserName({ commit }, name) {
+      localStorage.setItem('name', name)
+      commit('SET_USER_NAME', name)
+    },
     async fetchTrendingGifs({ commit }) {
       const gifs = await getTrendingGifs()
       commit('ADD_GIFS_TO_TRENDING', gifs)

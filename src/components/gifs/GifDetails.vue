@@ -20,30 +20,22 @@
           ></lazy-image>
         </div>
         <div class="gif__info">
-          <h4 class="gif__title">{{ gifData.title }}</h4>
-          <div class="gif__user">
-            <span
-              class="verified-icon"
-              v-if="gifData.user && gifData.user.is_verified"
-              ><icon-check
-            /></span>
-            <p>{{ gifData.username || "anonymous" }}</p>
+          <div class="gif__details">
+            
+            <h4 class="gif__title">{{ gifData.title }}</h4>
+            <gif-upload-user :uploadUser="gifData.user" />
           </div>
-        </div>
-        <div class="gif__controls gif__buttons">
-          <button class="base__button" @click="addToSavedGifs(gifData)" :disabled="isGifInFavorites(gifData.id)">
-            + Add to Saved GIFS
-          </button>
-        </div>
-        <div class="gif__related">
-          <lazy-image
-            v-for="relatedGif in relatedGifs"
-            :key="relatedGif.id"
-            :src="relatedGif.images.preview_gif.url"
-            :aspectRatio="getAspectRatio(gifData.images.fixed_width_small)"
-            :alt="relatedGif.title"
-            color="#EEE"
-          ></lazy-image>
+          
+          <div class="gif__controls">
+            <base-anchor-link :href="gifData.url">View Original Source</base-anchor-link>
+
+            <div class="gif__buttons">
+              <base-button @click="addToSavedGifs(gifData)" :disabled="isGifInFavorites(gifData.id)">
+                +
+              </base-button>
+
+            </div>
+          </div>
         </div>
       </div>
       <tooltip v-if="showInfoMsg">Added {{ gifData.title }} to Saved.</tooltip>
@@ -58,10 +50,13 @@ import { getRelatedGifs } from "@/api";
 import IconCancel from "../icons/IconCancel.vue";
 import IconCheck from "../icons/IconCheck.vue";
 import Tooltip from '../Tooltip.vue';
+import GifUploadUser from '../GifUploadUser.vue';
+import BaseAnchorLink from '../base/BaseAnchorLink.vue';
+import BaseButton from '../base/BaseButton.vue';
 
 export default {
   name: "GifDetails",
-  components: { IconCancel, IconCheck, Tooltip },
+  components: { IconCancel, IconCheck, Tooltip, GifUploadUser, BaseAnchorLink, BaseButton },
   props: {
     gifData: {
       type: Object,
@@ -73,14 +68,18 @@ export default {
     showInfoMsg: false
   }),
   async mounted() {
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', (e) => this.keyPressToCloseDetails())
+    this.relatedGifs = await this.getRelatedGIFS();
+  },
+  destroyed() {
+    document.removeEventListener('keydown', (e) => this.keyPressToCloseDetails())
+  },
+  methods: {
+    keyPressToCloseDetails() {
       if (e.keyCode == 27) {
         this.closeDetails()
       }
-    })
-    this.relatedGifs = await this.getRelatedGIFS();
-  },
-  methods: {
+    },
     closeDetails(e) {
       // if (e.target !== e.currentTarget) return // fire click event on current target
       this.$emit("closeDetails");
@@ -176,16 +175,18 @@ button {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 85%;
-  height: 50%;
+  // height: 50%;
   z-index: 2;
   background-color: var(--secondary-color);
-  padding: 0.5rem;
-  overflow: scroll;
-  border-radius: 6px 0 0 6px;
+  padding: 1rem;
+  // overflow: scroll;
+  border-radius: 6px;
 
   @include desktop {
-    /* width: 50%; */
+    width: 640px;
+    // height: 640px;
   }
+  
 
   &__image {
     border-radius: 6px;
@@ -193,13 +194,20 @@ button {
     width: 70%;
 
     @include desktop {
-      width: 480px;
+      width: 50%;
     }
   }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 180px;
+  }
   &__title {
-    margin: 0.5rem 0 0 0;
-    width: 65%;
-    font-size: 1.625rem;
+    margin: 0.5rem 0 .5rem 0;
+    width: 85%;
+    font-size: 1.25rem;
     font-weight: 600;
     color: var(--accent-color);
   }
@@ -209,6 +217,11 @@ button {
     align-items: center;
     color: var(--accent-color);
   }
+
+  &__buttons {
+
+  }
+
   &__related {
     margin: 2rem 0 0 0;
     display: grid;
@@ -218,6 +231,13 @@ button {
     @include desktop {
       grid-template-columns: repeat(8, 1fr);
     }
+  }
+  &__controls {
+    // margin-top: 6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    
   }
   &__close-btn {
     @include center-items;
@@ -248,5 +268,8 @@ button {
   background-color: var(--accent-color);
   border-radius: 10rem;
   margin-right: 0.5rem;
+}
+.button  {
+  
 }
 </style>

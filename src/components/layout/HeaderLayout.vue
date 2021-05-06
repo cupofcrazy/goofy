@@ -5,20 +5,25 @@
                 <nav class="header-nav">
                     <h4 class="header__logo"><router-link class="link" :to="{ name: 'Home' }">{{ title }}</router-link></h4>
                     <ul class="header-nav__links">
-                        <li><router-link class="link" :to="{ name: 'Trending' }">Trending</router-link></li>
-                        <li><router-link class="link" :to="{ name: 'Search' }">Search</router-link></li>
-                        <li><router-link class="link" :to="{ name: 'Saved' }">Saved ({{ $store.state.savedGifs.length }})</router-link></li>
+                        <li><base-link :to="{ name: 'Trending' }">Trending</base-link></li>
+                        <li><base-link :to="{ name: 'Search' }">Search</base-link></li>
+                        <li><base-link :to="{ name: 'Saved' }">Saved ({{ $store.state.savedGifs.length }})</base-link></li>
                     </ul>
+                    <div class="header__menu">
+                        <button class="header__menu-button" @click="openMenu">Menu</button>
+                    </div>
 
                 </nav>
-                <button class="header__button" @click="toggleColorMode"></button>
             </div>
         </header>
     </transition>
 </template>
 
 <script>
+import BaseLink from '../base/BaseLink.vue'
+
 export default {
+  components: { BaseLink },
     name: 'HeaderLayout',
     data: () =>({
         title: 'giphy — client'
@@ -32,6 +37,9 @@ export default {
             } else {
                 localStorage.removeItem("theme", "dark")
             }
+        },
+        openMenu() {
+            
         }
     }
 }
@@ -74,9 +82,15 @@ export default {
     &-nav {
         display: flex;
         align-items: center;
+        justify-content: space-between;
         flex-direction: row;
+        width: 100%;
     }
     &-nav__links {
+        display: none;
+        @include desktop {
+            display: block;
+        }
         li {
             display: inline-block;
             margin: 0 1rem 0 0;
@@ -85,6 +99,12 @@ export default {
             @include desktop {
                 margin: 0 1.625rem 0 0;
             }
+        }
+    }
+    &__menu {
+        display: block;
+        @include desktop {
+            display: none;
         }
     }
 }
